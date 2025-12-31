@@ -1,0 +1,16 @@
+@import './colors.css';
+
+/* Componentes Material */
+@import './styles/material-components/button.css';
+@import './styles/material-components/outlined-text-field.css';
+@import './styles/material-components/select.css';
+@import './styles/material-components/table.css';
+@import './styles/material-components/checkbox.css';
+
+/* Fondo general */
+body {
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+}

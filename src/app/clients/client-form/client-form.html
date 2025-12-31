@@ -1,0 +1,53 @@
+<mat-card class="client-form-card">
+  <h3 class="form-title">
+    {{ client.id ? 'Editar cliente' : 'Nuevo cliente' }}
+  </h3>
+
+  <form (ngSubmit)="onSubmit()" class="form-content">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombres</mat-label>
+      <input
+        matInput
+        [(ngModel)]="client.nombres"
+        name="nombres"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellidos</mat-label>
+      <input
+        matInput
+        [(ngModel)]="client.apellidos"
+        name="apellidos"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>DNI</mat-label>
+      <input matInput [(ngModel)]="client.dni" name="dni" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Edad</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="client.edad"
+        name="edad"
+        required
+      />
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-button type="button" (click)="cancel.emit()">
+        Cancelar
+      </button>
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>save</mat-icon>
+        Guardar
+      </button>
+    </div>
+  </form>
+</mat-card>

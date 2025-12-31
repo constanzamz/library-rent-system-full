@@ -1,0 +1,15 @@
+:root {
+  /* Colores base */
+  --primary: #2c3e50;
+  --primary-light: #3498db;
+  --primary-dark: #1f2d3a;
+
+  --background: #f4f6f8;
+  --surface: #ffffff;
+
+  --text-primary: #2c2c2c;
+  --text-secondary: #6b6b6b;
+
+  --danger: #e74c3c;
+  --success: #2ecc71;
+}

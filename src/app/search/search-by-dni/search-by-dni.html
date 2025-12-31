@@ -1,0 +1,77 @@
+<div class="search-container">
+  <div class="search-content">
+    <div class="search-header">
+      <h1 class="search-title">Buscar Libros por DNI</h1>
+      <p class="search-subtitle">
+        Ingresá el DNI del cliente para ver los libros que tiene alquilados
+      </p>
+    </div>
+
+    <div class="search-section">
+      <form class="search-form" (ngSubmit)="search()">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>DNI del Cliente</mat-label>
+          <input
+            matInput
+            [(ngModel)]="dni"
+            placeholder="Ej: 45013390"
+            name="dni"
+            (keyup.enter)="search()"
+          />
+          <mat-icon matPrefix>badge</mat-icon>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="search-button"
+          [disabled]="loading"
+        >
+          <mat-icon>search</mat-icon>
+          Buscar
+        </button>
+      </form>
+    </div>
+
+    <div class="loading-container" *ngIf="loading">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <div class="error-state" *ngIf="errorMessage && !loading">
+      <mat-icon class="error-state-icon">error</mat-icon>
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div class="results-section" *ngIf="searched && !errorMessage && !loading">
+      <div class="results-header">
+        <h2 class="results-title">
+          <mat-icon>book</mat-icon>
+          Libros Encontrados
+        </h2>
+        <span class="results-count" *ngIf="books.length > 0">
+          {{ books.length }} {{ books.length === 1 ? 'libro' : 'libros' }}
+        </span>
+      </div>
+
+      <div class="books-grid" *ngIf="books.length > 0">
+        <mat-card *ngFor="let book of books" class="book-card">
+          <mat-icon class="book-icon">menu_book</mat-icon>
+          <div class="book-title">{{ book.nombre }}</div>
+          <div class="book-author">
+            <mat-icon>person</mat-icon>
+            {{ book.autor }}
+          </div>
+          <div class="book-isbn">
+            <mat-icon>qr_code</mat-icon>
+            ISBN: {{ book.isbn }}
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="empty-state" *ngIf="books.length === 0">
+        <mat-icon class="empty-state-icon">inbox</mat-icon>
+        <p>No hay libros alquilados para ese DNI</p>
+      </div>
+    </div>
+  </div>
+</div>

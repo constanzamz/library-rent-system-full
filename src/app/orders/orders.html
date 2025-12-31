@@ -1,0 +1,121 @@
+<div class="orders-container">
+  <div class="orders-content">
+    <div class="orders-header">
+      <h1 class="orders-title">Registrar Pedido</h1>
+    </div>
+
+    <!-- Selección de cliente -->
+    <div class="form-section">
+      <h3 class="section-title">
+        <mat-icon>people</mat-icon>
+        Seleccionar Cliente
+      </h3>
+      <mat-form-field appearance="outline" class="client-select">
+        <mat-label>Buscar cliente</mat-label>
+        <input
+          matInput
+          [ngModel]="clientQuery"
+          (ngModelChange)="onClientQueryChange($event)"
+          [matAutocomplete]="auto"
+          placeholder="Escribí nombre o apellido (mín. 2 letras)"
+          name="clientQuery"
+        />
+        <mat-icon matPrefix>search</mat-icon>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="onClientSelected($event.option.value)"
+        >
+          <mat-option *ngFor="let c of clientOptions" [value]="c">
+            {{ c.nombres }} {{ c.apellidos }} ({{ c.dni }})
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <div class="selected-client-info" *ngIf="selectedClient">
+        <mat-icon>check_circle</mat-icon>
+        <span>
+          <strong>Seleccionado:</strong>
+          {{ selectedClient.nombres }} {{ selectedClient.apellidos }} ({{ selectedClient.dni }})
+        </span>
+      </div>
+    </div>
+
+    <!-- Lista de libros -->
+    <div class="form-section">
+      <h3 class="section-title">
+        <mat-icon>book</mat-icon>
+        Seleccionar Libros
+      </h3>
+
+      <mat-form-field appearance="outline" class="books-search">
+        <mat-label>Buscar libro</mat-label>
+        <input
+          matInput
+          [(ngModel)]="searchBook"
+          placeholder="Nombre, autor o ISBN"
+          name="search"
+        />
+        <mat-icon matPrefix>search</mat-icon>
+      </mat-form-field>
+
+      <div class="selected-books-info" *ngIf="selectedBooks.length > 0">
+        <p>
+          <mat-icon>check_circle</mat-icon>
+          {{ selectedBooks.length }}
+          {{ selectedBooks.length === 1 ? 'libro seleccionado' : 'libros seleccionados' }}
+        </p>
+      </div>
+
+      <div class="books-list" *ngIf="filteredBooks.length > 0">
+        <div
+          *ngFor="let book of filteredBooks"
+          class="book-card"
+          [class.selected]="selectedBooks.includes(book.id!)"
+          [class.unavailable]="!book.isAvailable"
+          (click)="book.isAvailable && toggleBook(book.id!)"
+        >
+          <div class="book-card-content">
+            <mat-checkbox
+              class="book-checkbox"
+              [checked]="selectedBooks.includes(book.id!)"
+              [disabled]="!book.isAvailable"
+              (change)="toggleBook(book.id!)"
+              (click)="$event.stopPropagation()"
+            >
+            </mat-checkbox>
+            <div class="book-info">
+              <div class="book-title">{{ book.nombre }}</div>
+              <div class="book-author">{{ book.autor }}</div>
+              <div class="book-isbn">ISBN: {{ book.isbn }}</div>
+              <span
+                class="book-status"
+                [class.available]="book.isAvailable"
+                [class.unavailable]="!book.isAvailable"
+              >
+                {{ book.isAvailable ? 'Disponible' : 'Prestado' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" *ngIf="filteredBooks.length === 0">
+        <p>No se encontraron libros</p>
+      </div>
+    </div>
+
+    <!-- Botón de acción -->
+    <div class="actions-section">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveOrder()"
+        [disabled]="!selectedClientId || selectedBooks.length === 0"
+      >
+        <mat-icon>add_shopping_cart</mat-icon>
+        Registrar Pedido
+      </button>
+    </div>
+  </div>
+</div>
+

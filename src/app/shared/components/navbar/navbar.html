@@ -1,0 +1,36 @@
+<mat-toolbar class="navbar">
+  <div class="navbar-content">
+    <a routerLink="/" class="navbar-brand">
+      <mat-icon>menu_book</mat-icon>
+      <span class="brand-text">Library Rent System</span>
+    </a>
+
+    <nav class="navbar-links">
+      <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>home</mat-icon>
+        Inicio
+      </a>
+      <a mat-button routerLink="/clients" routerLinkActive="active">
+        <mat-icon>people</mat-icon>
+        Clientes
+      </a>
+      <a mat-button routerLink="/books" routerLinkActive="active">
+        <mat-icon>book</mat-icon>
+        Libros
+      </a>
+      <a mat-button routerLink="/orders" routerLinkActive="active">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Crear Pedido
+      </a>
+      <a mat-button routerLink="/orders-list" routerLinkActive="active">
+        <mat-icon>list</mat-icon>
+        Pedidos
+      </a>
+      <a mat-button routerLink="/search-dni" routerLinkActive="active">
+        <mat-icon>search</mat-icon>
+        Buscar por DNI
+      </a>
+    </nav>
+  </div>
+</mat-toolbar>
+

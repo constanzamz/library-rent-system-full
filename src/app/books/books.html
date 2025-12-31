@@ -1,0 +1,85 @@
+<div class="books-container">
+  <div class="books-content">
+    <div class="books-header">
+      <h1 class="books-title">Libros</h1>
+    </div>
+
+    <div class="books-actions">
+      <button mat-raised-button color="primary" (click)="newBook()">
+        <mat-icon>add</mat-icon>
+        Nuevo libro
+      </button>
+    </div>
+
+    <div class="form-container" *ngIf="selectedBook">
+      <app-book-form
+        [book]="selectedBook"
+        (save)="saveBook($event)"
+        (cancel)="selectedBook = null"
+      >
+      </app-book-form>
+    </div>
+
+    <div class="table-container" *ngIf="books.length > 0">
+      <table mat-table [dataSource]="books" class="mat-elevation-z0">
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let book">{{ book.nombre }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="autor">
+          <th mat-header-cell *matHeaderCellDef>Autor</th>
+          <td mat-cell *matCellDef="let book">{{ book.autor }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="isbn">
+          <th mat-header-cell *matHeaderCellDef>ISBN</th>
+          <td mat-cell *matCellDef="let book">{{ book.isbn }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="disponible">
+          <th mat-header-cell *matHeaderCellDef>Disponible</th>
+          <td mat-cell *matCellDef="let book">
+            <span
+              class="status-badge"
+              [class.available]="book.isAvailable"
+              [class.unavailable]="!book.isAvailable"
+            >
+              {{ book.isAvailable ? 'Disponible' : 'Prestado' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let book" class="actions-cell">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="editBook(book)"
+              matTooltip="Editar"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteBook(book.id)"
+              matTooltip="Eliminar"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <div class="table-container empty-state" *ngIf="books.length === 0">
+      <p>No hay libros registrados</p>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,13 @@
+button.mat-mdc-raised-button {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+button.mat-mdc-raised-button:hover {
+  background-color: var(--primary);
+}
+
+button.mat-mdc-outlined-button {
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+}
