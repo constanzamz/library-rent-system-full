@@ -24,6 +24,7 @@
         <mat-autocomplete
           #auto="matAutocomplete"
           (optionSelected)="onClientSelected($event.option.value)"
+          [displayWith]="displayClientFn"
         >
           <mat-option *ngFor="let c of clientOptions" [value]="c">
             {{ c.nombres }} {{ c.apellidos }} ({{ c.dni }})

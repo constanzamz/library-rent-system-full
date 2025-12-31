@@ -38,6 +38,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   styleUrl: './orders.css',
 })
 export class Orders implements OnInit {
+  displayClientFn(client?: Client): string {
+    return client ? `${client.nombres} ${client.apellidos} (${client.dni})` : '';
+  }
   private clientsService = inject(ClientsService);
   private booksService = inject(BooksService);
   private ordersService = inject(OrdersService);

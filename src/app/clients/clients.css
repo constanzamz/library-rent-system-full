@@ -106,6 +106,16 @@ tr:hover {
   font-weight: 300;
 }
 
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-field {
+  width: min(700px, 100%);
+}
+
 .form-container {
   position: fixed;
   top: 0;

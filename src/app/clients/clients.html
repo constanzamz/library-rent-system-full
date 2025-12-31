@@ -11,6 +11,36 @@
       </button>
     </div>
 
+    <div class="search-bar">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Buscar cliente por nombre o apellido</mat-label>
+
+        <input
+          matInput
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="onSearchChange($event)"
+          placeholder="Ej: Ana, Pérez..."
+        />
+
+        <button
+          *ngIf="searchTerm"
+          mat-icon-button
+          matSuffix
+          aria-label="Limpiar"
+          (click)="clearSearch()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <mat-progress-spinner
+          *ngIf="searching"
+          matSuffix
+          mode="indeterminate"
+          diameter="18"
+        ></mat-progress-spinner>
+      </mat-form-field>
+    </div>
+
     <div class="form-container" *ngIf="selectedClient">
       <app-client-form
         [client]="selectedClient"
